@@ -93,9 +93,13 @@ class Consistency
      */
     public static function flexEntity($entityName)
     {
+        $alias = static::getEntityShortestName($entityName);
+        if(class_exists($alias, false)) {
+            return true;
+        }
         return class_alias(
             $entityName,
-            static::getEntityShortestName($entityName),
+            $alias,
             false
         );
     }
